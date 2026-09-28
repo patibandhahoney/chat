@@ -1,0 +1,82 @@
+:root {
+  --ink: #16283a;
+  --ink-soft: #3b5168;
+  --paper: #f3f6f8;
+  --white: #fff;
+  --line: #d9e1e7;
+  --accent: #0e7c86;
+  --accent-dark: #0a5d65;
+  --mine: #d4eef0;
+  --danger: #b3261e;
+  --ok: #2e9e5b;
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: 'Figtree', system-ui, sans-serif; background: var(--paper); color: var(--ink); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+button {
+  background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+  padding: 10px 18px; font-weight: 600; cursor: pointer;
+}
+button:hover:not(:disabled) { background: var(--accent-dark); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button.ghost { background: transparent; color: var(--ink-soft); border: 1px solid var(--line); }
+button.ghost:hover:not(:disabled) { background: var(--paper); }
+
+input {
+  width: 100%; padding: 11px 14px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--white); color: var(--ink);
+}
+
+/* Login */
+.login { min-height: 100%; display: grid; place-items: center; padding: 20px; background: var(--ink); }
+.login-card { background: var(--white); padding: 32px; border-radius: 14px; width: min(400px, 100%); display: grid; gap: 10px; }
+.login-card h1 { margin: 0; font-size: 1.6rem; }
+.login-card p { margin: 0 0 8px; color: var(--ink-soft); }
+.login-card label { font-weight: 600; font-size: .9rem; }
+
+/* Layout */
+.chat { display: grid; grid-template-columns: 240px 1fr; height: 100%; }
+.sidebar { background: var(--ink); color: #dbe6ee; padding: 20px; overflow-y: auto; }
+.sidebar h2 { font-size: 1rem; margin: 0 0 14px; display: flex; justify-content: space-between; }
+.sidebar h2 span { background: #ffffff22; border-radius: 99px; padding: 0 9px; }
+.sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); margin-right: 10px; }
+
+.main { display: flex; flex-direction: column; min-height: 0; background: var(--white); }
+.main header {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+}
+.main header h1 { margin: 0; font-size: 1.2rem; }
+.status { font-size: .85rem; }
+.status.on { color: var(--ok); }
+.status.off { color: var(--danger); }
+.error { background: #fdecea; color: var(--danger); padding: 10px 20px; font-size: .92rem; }
+
+/* Messages */
+.messages { flex: 1; overflow-y: auto; padding: 20px; background: var(--paper); display: flex; flex-direction: column; gap: 6px; }
+.messages.empty { align-items: center; justify-content: center; color: var(--ink-soft); }
+.day { text-align: center; color: var(--ink-soft); font-size: .8rem; margin: 14px 0 8px; }
+.msg { max-width: min(520px, 80%); background: var(--white); border: 1px solid var(--line); border-radius: 12px 12px 12px 3px; padding: 8px 12px; }
+.msg.mine { margin-left: auto; background: var(--mine); border-color: #b5dfe2; border-radius: 12px 12px 3px 12px; }
+.msg .author { display: block; font-size: .8rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 2px; }
+.msg p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.45; }
+.msg time { display: block; text-align: right; font-size: .7rem; color: var(--ink-soft); margin-top: 3px; }
+.typing { font-size: .85rem; color: var(--ink-soft); font-style: italic; }
+
+/* Composer */
+.composer { display: flex; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); }
+
+@media (max-width: 720px) {
+  .chat { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .sidebar { padding: 10px 14px; max-height: 84px; }
+  .sidebar h2 { margin-bottom: 6px; }
+  .sidebar ul { grid-auto-flow: column; overflow-x: auto; gap: 16px; }
+  .sidebar li { white-space: nowrap; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .messages { scroll-behavior: smooth; }
+}
